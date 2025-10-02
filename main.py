@@ -26,8 +26,11 @@ client = OpenAI(
 
 app = FastAPI(title="OpenRouter Chatbot Backend")
 
+# --- PERBAIKAN CORS DI SINI ---
 origins = [
+    "*", # Mengizinkan semua origin untuk mengatasi masalah di lingkungan Canvas/Vercel
     "http://localhost:3000",
+    "https://masbro-2.vercel.app"
 ]
 
 app.add_middleware(
@@ -37,6 +40,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# ------------------------------
 
 class ContentPart(BaseModel):
     type: str
